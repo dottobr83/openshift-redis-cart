@@ -29,4 +29,4 @@ client_result "Redis ${version} database added.  Please make note of these crede
 client_result ""
 client_result "   Password: $password"
 client_result ""
-client_result 'Connection URL: redis://$OPENSHIFT_REDIS_DB_HOST:$OPENSHIFT_REDIS_DB_PORT/
+client_result 'Connection URL: redis://$OPENSHIFT_REDIS_DB_HOST:$OPENSHIFT_REDIS_DB_PORT/'
