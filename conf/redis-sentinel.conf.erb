@@ -23,7 +23,7 @@ when 'read_replica'
   end.compact.each do |(gear, host, port)|
 %>
 sentinel monitor <%= gear %> <%= host %> <%= port %> <%= quorum %>
-sentinel auth-pass <%= gear %> <%= ENV['REDIS_PASSWORD'] %>
+sentinel auth-pass <%= gear %> <%= ENV['OPENSHIFT_REDIS_DB_PASSWORD'] %>
 sentinel down-after-milliseconds <%= gear %> <%= ENV['REDIS_SENTINEL_DOWN_AFTER'] || 15000 %>
 sentinel can-failover <%= gear %> yes
 sentinel parallel-syncs <%= gear %> 1
@@ -62,7 +62,7 @@ end
 #
 # Example:
 #
-# sentinel auth-pass <%= ENV['OPENSHIFT_GEAR_UUID'] %> <%= ENV['REDIS_PASSWORD'] %>
+# sentinel auth-pass <%= ENV['OPENSHIFT_GEAR_UUID'] %> <%= ENV['OPENSHIFT_REDIS_DB_PASSWORD'] %>
 
 # sentinel down-after-milliseconds <master-name> <milliseconds>
 #

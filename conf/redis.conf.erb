@@ -167,7 +167,7 @@ when 'read_replica'
     end.compact.first
 %>
 slaveof <%= master.split(':').join(' ') %>
-masterauth <%= ENV['REDIS_PASSWORD'] %>
+masterauth <%= ENV['OPENSHIFT_REDIS_DB_PASSWORD'] %>
 <%
   end
 else
@@ -274,8 +274,8 @@ slave-priority 100
 # 150k passwords per second against a good box. This means that you should
 # use a very strong password otherwise it will be very easy to break.
 #
-<% if !(ENV['REDIS_PASSWORD'] || "").empty? %>
-requirepass <%= ENV['REDIS_PASSWORD'] %>
+<% if !(ENV['OPENSHIFT_REDIS_DB_PASSWORD'] || "").empty? %>
+requirepass <%= ENV['OPENSHIFT_REDIS_DB_PASSWORD'] %>
 <% end %>
 
 # Command renaming.

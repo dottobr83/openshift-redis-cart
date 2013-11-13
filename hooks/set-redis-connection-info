@@ -77,14 +77,14 @@ mode =
   end
 
 # Use the password of the first master
-password = gears[masters.first]['S_REDIS_DB_PASSWORD'] || ENV['REDIS_PASSWORD']
+password = gears[masters.first]['S_REDIS_DB_PASSWORD'] || ENV['OPENSHIFT_REDIS_DB_PASSWORD']
 # An array of all of the host:port pairs for the cluster
 hosts = gears.map{ |k,v| "#{v['S_REDIS_DB_HOST']}:#{v['S_REDIS_DB_PORT']}" }.compact.uniq.sort
 # A list of key value pairs in <gear id> => <host:port pair> for the cluster
 members = gears.map{ |k,v| "#{k}=#{v['S_REDIS_DB_HOST']}:#{v['S_REDIS_DB_PORT']}" }.compact.uniq.sort
 
 File.delete('env/REDIS_CLI') rescue nil
-File.open('env/REDIS_PASSWORD', 'w'){ |f| f.puts password }
+File.open('env/OPENSHIFT_REDIS_DB_PASSWORD', 'w'){ |f| f.puts password }
 File.open('env/REDIS_CLUSTER_MEMBERS', 'w'){ |f| f.puts members.join("\n") }
 File.open('env/REDIS_CLUSTER', 'w'){ |f| f.puts hosts.join(",") }
 File.open('env/REDIS_CLUSTER_MASTERS', 'w'){ |f| f.puts masters.join(",") }
