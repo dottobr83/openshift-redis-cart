@@ -1,29 +1,33 @@
+---
 Name: redis
 Cartridge-Short-Name: REDIS
+Architecture: noarch
 Display-Name: Redis
+Description: Redis is a scalable, high-performance, open source key-value storage.
 Version: "2.6"
+Versions:
+- '2.6'
 Website: https://github.com/pascal-bach/openshift-redis-cart
-Cartridge-Version: 0.1.0
+Cartridge-Version: 0.2.0
 Cartridge-Vendor: pascalbach
 Categories:
   - service
   - database
+  - nosql
   - embedded
+Cart-Data:
+- Key: password
+  Type: cart_data
+  Description: Password to access the redis server
+- Key: connection_url
+  Type: cart_data
+  Description: Redis connection URL
 Provides:
   - redis-2.6
   - redis
 Scaling:
   Min: 1
   Max: -1
-Endpoints:
-  - Private-IP-Name:   HOST
-    Private-Port-Name: PORT
-    Private-Port:      16379
-    Public-Port-Name:  PROXY_PORT
-  - Private-IP-Name:   SENTINEL_HOST
-    Private-Port-Name: SENTINEL_PORT
-    Private-Port:      26379
-    Public-Port-Name:  SENTINEL_PROXY_PORT
 Subscribes:
   set-redis-connection-info:
     Type: "ENV:NET_TCP:db:redis:connection-info-v1"
@@ -33,3 +37,14 @@ Publishes:
     Type: "ENV:NET_TCP:db:connection-info"
   publish-redis-connection-info:
     Type: "ENV:NET_TCP:db:redis:connection-info-v1"
+Endpoints:
+  - Private-IP-Name:   DB_HOST
+    Private-Port-Name: DB_PORT
+    Private-Port:      16379
+    Public-Port-Name:  DB_PROXY_PORT
+    Protocols:
+    - redis
+  - Private-IP-Name:   SENTINEL_HOST
+    Private-Port-Name: SENTINEL_PORT
+    Private-Port:      26379
+    Public-Port-Name:  SENTINEL_PROXY_PORT
