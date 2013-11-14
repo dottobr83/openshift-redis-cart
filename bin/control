@@ -63,6 +63,7 @@ function update() {
 function start() {
     if ! [ -f $pid ]; then
         echo $REDIS_CLI > env/REDIS_CLI
+        echo "Starting Redis cartridge"
         erb conf/redis.conf.erb | redis-server -
 
         ret=$?
@@ -75,6 +76,7 @@ function start() {
     if [ "$REDIS_SENTINEL" == "1" ]; then
         if ! [ -f $sentinel_pid ]; then
             echo $REDIS_SENTINEL_CLI > env/REDIS_SENTINEL_CLI
+            echo "Starting Redis Sentinel cartridge"
             erb conf/redis-sentinel.conf.erb | redis-server - --sentinel
             ret=$?
             if [ $ret -ne 0 ]; then
@@ -90,11 +92,13 @@ function stop() {
     s=0
 
     if [ -f $pid ]; then
+        echo "Stopping Redis cartridge"
         redis-cli $REDIS_CLI SHUTDOWN
         m=$?
     fi
 
     if [ -f $sentinel_pid ]; then
+        echo "Stopping Redis Sentinel cartridge"
         redis-cli $REDIS_SENTINEL_CLI SHUTDOWN
         s=$?
     fi
