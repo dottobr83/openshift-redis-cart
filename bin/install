@@ -19,6 +19,10 @@ password=$(generate_password)
 echo "$password" > $OPENSHIFT_REDIS_DIR/env/OPENSHIFT_REDIS_DB_PASSWORD
 echo "redis://$password@$OPENSHIFT_REDIS_DB_HOST:$OPENSHIFT_REDIS_DB_PORT/" > $OPENSHIFT_REDIS_DIR/env/OPENSHIFT_REDIS_DB_URL
 
+# Write command line options to env vars
+echo "-h $OPENSHIFT_REDIS_DB_HOST -p $OPENSHIFT_REDIS_DB_PORT -a $password" > $OPENSHIFT_REDIS_DIR/env/REDIS_CLI
+echo "-h $OPENSHIFT_REDIS_SENTINEL_HOST -p $OPENSHIFT_REDIS_SENTINEL_PORT -a $password" > $OPENSHIFT_REDIS_DIR/env/REDIS_SENTINEL_CLI
+
 client_result "You can configure various Redis scaling and persistence modes by setting"
 client_result "environment variables - consult the cartridge README for more info."
 client_result "Redis ${version} database added.  Please make note of these credentials:"

@@ -8,7 +8,7 @@ Version: "2.6"
 Versions:
 - '2.6'
 Website: https://github.com/pascal-bach/openshift-redis-cart
-Cartridge-Version: 0.2.0
+Cartridge-Version: 0.2.1
 Cartridge-Vendor: pascalbach
 Categories:
   - service
