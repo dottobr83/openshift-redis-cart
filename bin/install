@@ -14,7 +14,7 @@ echo $(pwd)/versions/2.6/bin > $OPENSHIFT_REDIS_DIR/env/OPENSHIFT_REDIS_PATH_ELE
 # generate password and setup env vars
 echo 'Generating username and password'
 
-password=cat /dev/urandom | head -c 50 | awk '{print $1"$(date +%s)$(echo $OPENSHIFT_HOMEDIR)$(generate_password)"}' | sha256sum | base64 | head -c 40
+password=$(cat /dev/urandom | head -c 50 | awk '{print $1"$(date +%s)$(echo $OPENSHIFT_HOMEDIR)$(generate_password)"}' | sha256sum | base64 | head -c 40)
 
 echo "$password" > $OPENSHIFT_REDIS_DIR/env/OPENSHIFT_REDIS_DB_PASSWORD
 echo "redis://$password@$OPENSHIFT_REDIS_DB_HOST:$OPENSHIFT_REDIS_DB_PORT/" > $OPENSHIFT_REDIS_DIR/env/OPENSHIFT_REDIS_DB_URL
