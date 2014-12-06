@@ -3,7 +3,7 @@ OpenShift Redis Cartridge
 
 Runs [Redis](http://redis.io) on [OpenShift](https://openshift.redhat.com/app/login) using downloadable cartridge support.  To install to OpenShift from the CLI (you'll need version 1.9 or later of rhc), create your app and then run:
 
-    rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart
+    rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=tengyifei/openshift-redis-cart
 
 Any log output will be generated to $OPENSHIFT_REDIS_DIR/logs/redis.log
 
